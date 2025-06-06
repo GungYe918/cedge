@@ -110,7 +110,7 @@ EX result : Harbor 'h1' registered for project 'my_pj'
 
 
 # 파일 등록
-python ../../server/harbor_main.py register-file s1.txt
+python ../../server/harbor/harbor_main.py harbor --name h1 register-file .
 
 EX result : File 's1.txt' registered with UUID: <자동 생성된 UUID>
 
