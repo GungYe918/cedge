@@ -2,7 +2,15 @@
   "host_node": "http://localhost:9001",
   "files": [
     {
-      "uuid": "b92336a2fb8a-d5cf09bc9bb1-1749184988",
+      "uuid": "b92336a2fb8a-356cd308ea12-1749189397",
+      "base_uuid": "b92336a2fb8a-356cd308ea12",
+      "project": "science",
+      "filename": "science/main.c",
+      "version": 12,
+      "mtime": 1749189395.1334288
+    },
+    {
+      "uuid": "b92336a2fb8a-d5cf09bc9bb1-1749188680",
       "base_uuid": "b92336a2fb8a-d5cf09bc9bb1",
       "project": "science",
       "filename": "science/s2.txt",
@@ -10,11 +18,11 @@
       "mtime": 1749183423.7804475
     },
     {
-      "uuid": "b92336a2fb8a-20374b173c7e-1749185053",
+      "uuid": "b92336a2fb8a-20374b173c7e-1749188680",
       "base_uuid": "b92336a2fb8a-20374b173c7e",
       "project": "science",
       "filename": "science/s1.txt",
-      "version": 3,
+      "version": 1,
       "mtime": 1749185050.324877
     }
   ]

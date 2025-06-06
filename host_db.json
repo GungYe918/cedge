@@ -1,14 +1,26 @@
 {
   "projects": {
-    "science": [
-      "test-uuid-1234"
-    ]
+    "project_alpha": {
+      "uuid": "e4d7ed6d-41fd-4e7e-8c8f-3abdef5ab2df",
+      "files": [
+        "file-uuid-1234"
+      ]
+    }
   },
   "uuids": {
-    "test-uuid-1234": {
-      "project": "science",
-      "host_node": "http://localhost:9001",
+    "file-uuid-1234": {
+      "project": "project_alpha",
+      "harbor_name": "harbor_alpha",
       "version": 1
     }
-  }
+  },
+  "harbors": [
+    {
+      "name": "harbor_alpha",
+      "url": "http://192.168.0.42:9000",
+      "manage_project": [
+        "project_alpha"
+      ]
+    }
+  ]
 }

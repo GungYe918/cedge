@@ -1,0 +1,14 @@
+{
+  "project": "project_alpha",
+  "harbor_name": "h1",
+  "registered_files": {
+    "/home/gungye/workspace/cedge_pj/cedge/examples/harbor/s1.txt": {
+      "uuid": "ea22c36b-8f9a-4428-b20e-ee582284b51c",
+      "filename": "s1.txt"
+    },
+    "/home/gungye/workspace/cedge_pj/cedge/examples/harbor/s2.txt": {
+      "uuid": "682ef943-66ba-475e-9dc7-df08a3dd06b9",
+      "filename": "s2.txt"
+    }
+  }
+}

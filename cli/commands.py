@@ -146,25 +146,59 @@ def get_last_content_from_diff(base_uuid, root_dir="."):
 
 def reconstruct_old_content_from_diffs(last_content, diffs):
     """현재(last_content)에서 diff들을 역으로 적용해 이전 버전 복원"""
+    if not diffs:
+        return last_content
+        
     lines = last_content.splitlines()
+    
+    # diff들을 역순으로 처리 (최신 변경부터 되돌림)
     for diff in reversed(diffs):
         t = diff["type"]
-        start = diff["start_l"] - 1  
-        end = diff["end_l"]           
+        start = diff["start_l"] - 1  # 1-based → 0-based 변환
+        end = diff["end_l"] - 1      # 1-based → 0-based 변환
+        
+        # 범위 검증
+        if start < 0:
+            print(f"⚠️  Warning: Invalid start index {start} for diff {diff}")
+            continue
+            
         if t == "+":
-            del lines[start:end]
+            # 추가된 라인들을 제거
+            # start_l부터 end_l까지의 라인을 삭제
+            if end >= start and end < len(lines):
+                del lines[start:end + 1]
+            elif start < len(lines):
+                # end가 범위를 벗어난 경우, start부터 끝까지 삭제
+                del lines[start:]
+                
         elif t == "-":
-            old_l = diff["old_l"]
-            lines[start:start] = old_l
+            # 삭제된 라인들을 복원
+            old_lines = diff.get("old_l", [])
+            if start <= len(lines):
+                lines[start:start] = old_lines
+            else:
+                # start가 범위를 벗어난 경우, 끝에 추가
+                lines.extend(old_lines)
+                
         elif t == "m":
-            old_l = diff["old_l"]
-            lines[start:end] = old_l
+            # 수정된 라인들을 원래대로 복원
+            old_lines = diff.get("old_l", [])
+            if end >= start and end < len(lines):
+                lines[start:end + 1] = old_lines
+            elif start < len(lines):
+                # end가 범위를 벗어난 경우, start부터 끝까지 교체
+                lines[start:] = old_lines
+            else:
+                # start도 범위를 벗어난 경우, 끝에 추가
+                lines.extend(old_lines)
+    
     return "\n".join(lines)
 
 
 # cli commands
 
 def show_diff_by_file(rel_path, root_dir="."):
+    """파일의 diff를 표시하는 함수"""
     full_path = os.path.join(root_dir, rel_path)
 
     if not os.path.exists(full_path):
@@ -199,11 +233,15 @@ def show_diff_by_file(rel_path, root_dir="."):
         print(f"❌ diff 파일을 읽을 수 없습니다: {e}")
         return
 
+    # 디버그 모드인 경우 상세한 복원 과정 출력
     old_content = reconstruct_old_content_from_diffs(last_content, diffs)
+    
     current_content = read_file(full_path)
 
+    # 내용이 동일한지 확인 (공백 제거 후 비교)
     if current_content.strip() == old_content.strip():
-        return  # 변경 없음
+        print(f"📄 {rel_path} (v{version}): 변경 사항 없음")
+        return
 
     # 파일 버전 등 출력
     print(f"\n📄 diff content: {rel_path} (v{version})")
@@ -212,15 +250,20 @@ def show_diff_by_file(rel_path, root_dir="."):
     old_lines = old_content.splitlines()
     new_lines = current_content.splitlines()
 
-    # git의 diff와 가장 유사하게 보여줌
-    diff = difflib.unified_diff(
+    # git의 diff style을 반영
+    diff_output = difflib.unified_diff(
         old_lines,
         new_lines,
         fromfile=f"{rel_path} (old)",
         tofile=f"{rel_path} (new)",
         lineterm=""
     )
-    print("\n".join(diff))
+    
+    diff_lines = list(diff_output)
+    if diff_lines:
+        print("\n".join(diff_lines))
+    else:
+        print("변경 사항이 감지되지 않았습니다.")
 
 
 def show_diff_by_folder(folder_path, root_dir="."):

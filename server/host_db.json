@@ -1,0 +1,32 @@
+{
+  "projects": {
+    "project_alpha": {
+      "uuid": "8292ee84-f38d-4c89-b0de-1741f8ac3275",
+      "files": [
+        "ea22c36b-8f9a-4428-b20e-ee582284b51c",
+        "682ef943-66ba-475e-9dc7-df08a3dd06b9"
+      ]
+    }
+  },
+  "uuids": {
+    "ea22c36b-8f9a-4428-b20e-ee582284b51c": {
+      "project": "project_alpha",
+      "harbor_name": "h1",
+      "version": 1
+    },
+    "682ef943-66ba-475e-9dc7-df08a3dd06b9": {
+      "project": "project_alpha",
+      "harbor_name": "h1",
+      "version": 1
+    }
+  },
+  "harbors": [
+    {
+      "name": "h1",
+      "url": "http://localhost:9000",
+      "manage_project": [
+        "project_alpha"
+      ]
+    }
+  ]
+}
