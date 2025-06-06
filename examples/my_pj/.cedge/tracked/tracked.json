@@ -1,0 +1,21 @@
+{
+  "host_node": "http://localhost:9001",
+  "files": [
+    {
+      "uuid": "b92336a2fb8a-d5cf09bc9bb1-1749184988",
+      "base_uuid": "b92336a2fb8a-d5cf09bc9bb1",
+      "project": "science",
+      "filename": "science/s2.txt",
+      "version": 1,
+      "mtime": 1749183423.7804475
+    },
+    {
+      "uuid": "b92336a2fb8a-20374b173c7e-1749185053",
+      "base_uuid": "b92336a2fb8a-20374b173c7e",
+      "project": "science",
+      "filename": "science/s1.txt",
+      "version": 3,
+      "mtime": 1749185050.324877
+    }
+  ]
+}

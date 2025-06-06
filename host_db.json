@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "science": [
+      "test-uuid-1234"
+    ]
+  },
+  "uuids": {
+    "test-uuid-1234": {
+      "project": "science",
+      "host_node": "http://localhost:9001",
+      "version": 1
+    }
+  }
+}
